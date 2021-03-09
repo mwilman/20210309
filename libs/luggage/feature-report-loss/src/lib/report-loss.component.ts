@@ -7,15 +7,15 @@ import { ReportLossFacade } from '@flight-workspace/luggage/domain';
   styleUrls: ['./report-loss.component.scss']
 })
 export class ReportLossComponent implements OnInit {
-    
-    
+
+
     lossReportList$ = this.reportLossFacade.lossReportList$;
 
 
     constructor(private reportLossFacade: ReportLossFacade) {
     }
 
-    
+
     ngOnInit() {
         this.load();
     }
