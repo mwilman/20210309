@@ -23,6 +23,10 @@ export const reducer = createReducer(
   on(FlightBookingActions.loadFlightBookings, state => state),
   on(FlightBookingActions.loadFlightBookingsSuccess, (state, action) => state),
   on(FlightBookingActions.loadFlightBookingsFailure, (state, action) => state),
+  on(FlightBookingActions.flightsLoaded, (state, action) => {
+    const flights = state.flights;
+    return { ...state, flights};
+  }),
 
 );
 
