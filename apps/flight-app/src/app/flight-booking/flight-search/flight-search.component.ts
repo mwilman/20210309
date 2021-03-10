@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import {Component, OnInit} from '@angular/core';
-import {FlightService} from '@flight-workspace/flight-lib';
+import { Flight, FlightService } from '@flight-workspace/flight-lib';
+import { Store } from '@ngrx/store';
+import { FlightBookingAppState } from '../+state/flight-booking.reducer';
+import { Observable } from 'rxjs';
+import { flightsLoaded } from '../+state/flight-booking.actions';
 
 @Component({
   selector: 'flight-search',
@@ -24,11 +28,15 @@ export class FlightSearchComponent implements OnInit {
     5: true
   };
 
+  flights$: Observable<Flight[]>;
+
   constructor(
-    private flightService: FlightService) {
+    private flightService: FlightService,
+    private store: Store<FlightBookingAppState>) {
   }
 
   ngOnInit() {
+    this.flights$ = this.store.select(state => state.flightBooking.flights);
   }
 
   search(): void {
