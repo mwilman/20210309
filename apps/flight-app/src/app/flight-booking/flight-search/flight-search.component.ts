@@ -42,8 +42,9 @@ export class FlightSearchComponent implements OnInit {
   search(): void {
     if (!this.from || !this.to) return;
 
-    this.flightService
-      .load(this.from, this.to, this.urgent);
+    this.flightService.find(this.from, this.to, this.urgent).subscribe((flights: Flight[]) => {
+      this.store.dispatch(flightsLoaded({flights}))
+    });
   }
 
   delay(): void {
